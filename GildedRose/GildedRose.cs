@@ -20,18 +20,18 @@ public class GildedRose
             ApplyQualityAdjustmentTo(
                 item,
                 AdjustmentFor(item),
-                item => item.SellIn--);
+                then: item => item.SellIn--);
         }
     }
 
-    private static void ApplyQualityAdjustmentTo(Item item, Func<Item, int>? adjustment, Action<Item> after)
+    private static void ApplyQualityAdjustmentTo(Item item, Func<Item, int>? adjustment, Action<Item> then)
     {
         if (adjustment is null) return;
 
         item.Quality = Math.Min(
             50,
             Math.Max(0, item.Quality + adjustment(item)));
-        after(item);
+        then(item);
     }
 
     private static Func<Item, int>? AdjustmentFor(Item currentItem)
