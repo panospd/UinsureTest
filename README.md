@@ -21,3 +21,10 @@ There are instructions in the [TextTest Readme](../texttests/README.md) for sett
 
     executable:${TEXTTEST_HOME}/csharpcore/GildedRoseTests/bin/Debug/net8.0/GildedRoseTests
 
+# Assumptions made during development
+1. Aged Brie upgrade with the same rate as normal items degrade.
+2. Backstage passes increase by 1 when sellin days greater than 10
+3. Item name matches to pattern when pattern is contained (exact words) in the item.name.
+4. Did not touch the Item class, as I don't want to get shot by the goblin in the corner!
+   - If I did, I would probably remove the public setters, introduce factory methods to instantiate an item and make sure that when an item is created, it is valid. For example Sulfuras items should have a quality of 80. Curently a sulfuras item could be created with a different quality value.
+
