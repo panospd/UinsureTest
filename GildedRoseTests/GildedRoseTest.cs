@@ -68,4 +68,25 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
         Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
     }
+
+    [TestCase(2, 40, 41)]
+    [TestCase(1, 39, 40)]
+    [TestCase(0, 38, 40)]
+    [TestCase(-1, 42, 44)]
+    [TestCase(-2, 49, 50)]
+    [TestCase(-3, 50, 50)]
+    public void WhenItemIsAgedBrie_ShouldUpdateQualityAccordingly(int sellIn, int quality, int expectedQuality)
+    {
+        // Arrange
+        var name = "Aged Brie";
+        var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
+        var app = new GildedRose(items);
+
+        // Act
+        app.UpdateQuality();
+
+        // Assert
+        Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
+        Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
+    }
 }
