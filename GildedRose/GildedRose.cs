@@ -19,16 +19,11 @@ public class GildedRose
         {
             Item item = _items[i];
 
-            ApplyQualityAdjustment(item, AdjustmentFor(item));
-
-            if (item.Name != "Sulfuras, Hand of Ragnaros")
-            {
-                item.SellIn--;
-            }
+            ApplyQualityAdjustment(item, AdjustmentFor(item), item => item.SellIn--);
         }
     }
 
-    private static void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment)
+    private static void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment, Action<Item> after)
     {
         if (adjustment is null) return;
 
@@ -43,6 +38,8 @@ public class GildedRose
         {
             item.Quality = 50;
         }
+
+        after(item);
     }
 
     private static Func<Item, int>? AdjustmentFor(Item item)
