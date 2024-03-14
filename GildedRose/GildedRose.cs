@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRoseKata;
 
@@ -31,12 +32,7 @@ public class GildedRose
                     adjustment *= 2;
                 }
 
-                item.Quality += adjustment;
-
-                if (item.Quality < 0)
-                {
-                    item.Quality = 0;
-                }
+                item.Quality = Math.Max(0, item.Quality + adjustment);
             }
             else
             {
