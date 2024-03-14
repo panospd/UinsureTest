@@ -17,11 +17,14 @@ public class GildedRose
     {
         foreach (var item in _items)
         {
-            ApplyQualityAdjustment(item, AdjustmentFor(item), item => item.SellIn--);
+            ApplyQualityAdjustmentTo(
+                item,
+                AdjustmentFor(item),
+                item => item.SellIn--);
         }
     }
 
-    private static void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment, Action<Item> after)
+    private static void ApplyQualityAdjustmentTo(Item item, Func<Item, int>? adjustment, Action<Item> after)
     {
         if (adjustment is null) return;
 
