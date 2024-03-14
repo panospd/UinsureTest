@@ -70,25 +70,23 @@ public class GildedRose
                 return adjustment;
             }
             ,
-            var item when item.Is("Conjured") => (item) => 2 * NormalItemAdjustment()(item)
+            var item when item.Is("Conjured") => (item) => 2 * NormalItemAdjustment(item)
             ,
             var item when item.Is("Sulfuras") => null,
-            _ => NormalItemAdjustment()
+            _ => NormalItemAdjustment
         };
     }
 
-    private static Func<Item, int> NormalItemAdjustment()
+    private static Func<Item, int> NormalItemAdjustment => (item) =>
     {
-        return (item) =>
+        var adjustment = -1;
+
+        if (item.SellIn <= 0)
         {
-            var adjustment = -1;
+            adjustment *= 2;
+        }
 
-            if (item.SellIn <= 0)
-            {
-                adjustment *= 2;
-            }
+        return adjustment;
+    };
 
-            return adjustment;
-        };
-    }
 }
