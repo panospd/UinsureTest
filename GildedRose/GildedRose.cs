@@ -47,11 +47,7 @@ public class GildedRose
                 };
             }
             ,
-            var item when item.Is("Aged Brie") => (item) =>
-            {
-                var adjustment = 1;
-                return item.SellIn > 0 ? adjustment : adjustment * 2;
-            }
+            var item when item.Is("Aged Brie") => (item) => -1 * NormalItemAdjustment(item)
             ,
             var item when item.Is("Conjured") => (item) => 2 * NormalItemAdjustment(item)
             ,
