@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace GildedRoseKata;
 
+#nullable enable
 public class GildedRose
 {
     private readonly IList<Item> _items;
@@ -18,21 +19,20 @@ public class GildedRose
         {
             Item item = _items[i];
 
-            if (item.Name == "Sulfuras, Hand of Ragnaros")
+            ApplyQualityAdjustment(item, AdjustmentFor(item));
+
+            if (item.Name != "Sulfuras, Hand of Ragnaros")
             {
-                continue;
+                item.SellIn--;
             }
-
-            var adjustment = AdjustmentFor(item);
-            ApplyQualityAdjustment(item, adjustment(item));
-
-            item.SellIn--;
         }
     }
 
-    private void ApplyQualityAdjustment(Item item, int adjustment)
+    private void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment)
     {
-        item.Quality += adjustment;
+        if (adjustment is null) return;
+
+        item.Quality += adjustment(item);
 
         if (item.Quality < 0)
         {
@@ -45,7 +45,7 @@ public class GildedRose
         }
     }
 
-    private static Func<Item, int> AdjustmentFor(Item item)
+    private static Func<Item, int>? AdjustmentFor(Item item)
     {
         return item.Name switch
         {
@@ -72,6 +72,7 @@ public class GildedRose
                 return adjustment;
             }
             ,
+            "Sulfuras, Hand of Ragnaros" => null,
             _ => (item) =>
             {
                 var adjustment = -1;
