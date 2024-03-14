@@ -28,9 +28,9 @@ public class GildedRose
     {
         if (adjustment is null) return;
 
-        item.Quality = Math.Max(0, item.Quality + adjustment(item));
-        item.Quality = Math.Min(50, item.Quality);
-
+        item.Quality = Math.Min(
+            50,
+            Math.Max(0, item.Quality + adjustment(item)));
         after(item);
     }
 
