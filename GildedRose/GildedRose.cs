@@ -15,10 +15,8 @@ public class GildedRose
 
     public void UpdateQuality()
     {
-        for (var i = 0; i < _items.Count; i++)
+        foreach (var item in _items)
         {
-            Item item = _items[i];
-
             ApplyQualityAdjustment(item, AdjustmentFor(item), item => item.SellIn--);
         }
     }
