@@ -53,12 +53,7 @@ public class GildedRose
                             _ => 1
                         };
 
-                        item.Quality += adjustment;
-
-                        if (item.Quality > 50)
-                        {
-                            item.Quality = 50;
-                        }
+                        item.Quality = Math.Min(50, item.Quality + adjustment);
                     }
                 }
             }
