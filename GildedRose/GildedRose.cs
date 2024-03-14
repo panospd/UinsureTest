@@ -43,11 +43,11 @@ public class GildedRose
         after(item);
     }
 
-    private static Func<Item, int>? AdjustmentFor(Item item)
+    private static Func<Item, int>? AdjustmentFor(Item currentItem)
     {
-        return item.Name switch
+        return currentItem switch
         {
-            "Backstage passes to a TAFKAL80ETC concert" => (item) =>
+            var item when item.Is("Backstage passes") => (item) =>
             {
                 return item.SellIn switch
                 {
@@ -58,7 +58,7 @@ public class GildedRose
                 };
             }
             ,
-            "Aged Brie" => (item) =>
+            var item when item.Is("Aged Brie") => (item) =>
             {
                 var adjustment = 1;
 
@@ -70,9 +70,9 @@ public class GildedRose
                 return adjustment;
             }
             ,
-            "Conjured" => (item) => 2 * NormalItemAdjustment()(item)
+            var item when item.Is("Conjured") => (item) => 2 * NormalItemAdjustment()(item)
             ,
-            "Sulfuras, Hand of Ragnaros" => null,
+            var item when item.Is("Sulfuras") => null,
             _ => NormalItemAdjustment()
         };
     }
