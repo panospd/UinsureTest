@@ -45,7 +45,7 @@ public class GildedRose
         }
     }
 
-    private Func<Item, int> AdjustmentFor(Item item)
+    private static Func<Item, int> AdjustmentFor(Item item)
     {
         return item.Name switch
         {
