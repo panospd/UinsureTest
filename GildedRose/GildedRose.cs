@@ -47,6 +47,7 @@ public class GildedRose
                     {
                         var adjustment = item.SellIn switch
                         {
+                            <= 0 => -item.Quality,
                             <= 5 => 3,
                             <= 10 => 2,
                             _ => 1
@@ -57,11 +58,6 @@ public class GildedRose
                         if (item.Quality > 50)
                         {
                             item.Quality = 50;
-                        }
-
-                        if (item.SellIn <= 0)
-                        {
-                            item.Quality = 0;
                         }
                     }
                 }
