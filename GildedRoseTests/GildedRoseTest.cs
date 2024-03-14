@@ -30,7 +30,7 @@ public class GildedRoseTest
     [TestCase(-1, 36, 34)]
     [TestCase(-5, 1, 0)]
     [TestCase(0, 0, 0)]
-    public void WhenItemIsNormal_ShouldNotUpdateQualityOrSellIn(int sellIn, int quality, int expectedQuality)
+    public void WhenItemIsNormal_ShouldUpdateQualityAccordingly(int sellIn, int quality, int expectedQuality)
     {
         // Arrange
         var name = "normal item";
