@@ -6,7 +6,10 @@ namespace GildedRoseTests;
 public class ItemMatcherTests
 {
     [TestCase("Aged Brie", "Aged Brie", true)]
+    [TestCase("Aged Brie", "Aged Brie!", true)]
     [TestCase("Aged Brie", "Aged Brie, an excellent choice", true)]
+    [TestCase("Aged Brie", "Aged Brie. An excellent choice", true)]
+    [TestCase("Aged Brie", "Aged Brie- An excellent choice", true)]
     [TestCase("Aged Brie", "An excellent choice,Aged Brie.", true)]
     [TestCase("Aged Brie", "An excellent choice,Aged Brie.", true)]
     [TestCase("Aged Brie", "Aged Bri", false)]
