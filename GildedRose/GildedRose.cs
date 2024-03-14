@@ -52,20 +52,42 @@ public class GildedRose
 
                     if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        var adjustment = item.SellIn switch
-                        {
-                            <= 0 => -item.Quality,
-                            <= 5 => 3,
-                            <= 10 => 2,
-                            _ => 1
-                        };
-
-                        item.Quality = Math.Min(50, item.Quality + adjustment);
+                        var adjustment = AdjustmentFor(item);
+                        item.Quality = Math.Min(50, item.Quality + adjustment(item));
                     }
                 }
             }
 
             item.SellIn = item.SellIn - 1;
         }
+    }
+
+    private Func<Item, int> AdjustmentFor(Item item)
+    {
+        return item.Name switch
+        {
+            "Backstage passes to a TAFKAL80ETC concert" => (item) =>
+            {
+                return item.SellIn switch
+                {
+                    <= 0 => -item.Quality,
+                    <= 5 => 3,
+                    <= 10 => 2,
+                    _ => 1
+                };
+            }
+            ,
+            _ => (item) =>
+            {
+                var adjustment = -1;
+
+                if (item.SellIn <= 0)
+                {
+                    adjustment *= 2;
+                }
+
+                return adjustment;
+            }
+        };
     }
 }
