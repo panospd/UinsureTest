@@ -26,7 +26,7 @@ public class GildedRose
             var adjustment = AdjustmentFor(item);
             ApplyQualityAdjustment(item, adjustment(item));
 
-            item.SellIn = item.SellIn - 1;
+            item.SellIn--;
         }
     }
 
