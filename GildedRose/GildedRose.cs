@@ -28,7 +28,7 @@ public class GildedRose
         }
     }
 
-    private void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment)
+    private static void ApplyQualityAdjustment(Item item, Func<Item, int>? adjustment)
     {
         if (adjustment is null) return;
 
