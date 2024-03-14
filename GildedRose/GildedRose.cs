@@ -30,17 +30,8 @@ public class GildedRose
             }
             else
             {
-                if (item.Name == "Aged Brie")
-                {
-                    var adjustment = AdjustmentFor(item);
-                    item.Quality = Math.Min(50, item.Quality + adjustment(item));
-                }
-
-                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    var adjustment = AdjustmentFor(item);
-                    item.Quality = Math.Min(50, item.Quality + adjustment(item));
-                }
+                var adjustment = AdjustmentFor(item);
+                item.Quality = Math.Min(50, item.Quality + adjustment(item));
             }
 
             item.SellIn = item.SellIn - 1;
