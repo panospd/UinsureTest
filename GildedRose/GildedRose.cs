@@ -32,14 +32,8 @@ public class GildedRose
             {
                 if (item.Name == "Aged Brie")
                 {
-                    var adjustment = 1;
-
-                    if (item.SellIn <= 0)
-                    {
-                        adjustment *= 2;
-                    }
-
-                    item.Quality = Math.Min(50, item.Quality + adjustment);
+                    var adjustment = AdjustmentFor(item);
+                    item.Quality = Math.Min(50, item.Quality + adjustment(item));
                 }
 
                 if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
@@ -66,6 +60,18 @@ public class GildedRose
                     <= 10 => 2,
                     _ => 1
                 };
+            }
+            ,
+            "Aged Brie" => (item) =>
+            {
+                var adjustment = 1;
+
+                if (item.SellIn <= 0)
+                {
+                    adjustment *= 2;
+                }
+
+                return adjustment;
             }
             ,
             _ => (item) =>
