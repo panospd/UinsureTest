@@ -89,4 +89,25 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
         Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
     }
+
+    [TestCase(2, 40, 38)]
+    [TestCase(1, 39, 37)]
+    [TestCase(0, 38, 34)]
+    [TestCase(-1, 36, 32)]
+    [TestCase(-5, 1, 0)]
+    [TestCase(0, 0, 0)]
+    public void WhenItemIsConjured_ShouldUpdateQualityAccordingly(int sellIn, int quality, int expectedQuality)
+    {
+        // Arrange
+        var name = "Conjured";
+        var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
+        var app = new GildedRose(items);
+
+        // Act
+        app.UpdateQuality();
+
+        // Assert
+        Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
+        Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
+    }
 }

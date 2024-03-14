@@ -70,18 +70,25 @@ public class GildedRose
                 return adjustment;
             }
             ,
+            "Conjured" => (item) => 2 * NormalItemAdjustment()(item)
+            ,
             "Sulfuras, Hand of Ragnaros" => null,
-            _ => (item) =>
+            _ => NormalItemAdjustment()
+        };
+    }
+
+    private static Func<Item, int> NormalItemAdjustment()
+    {
+        return (item) =>
+        {
+            var adjustment = -1;
+
+            if (item.SellIn <= 0)
             {
-                var adjustment = -1;
-
-                if (item.SellIn <= 0)
-                {
-                    adjustment *= 2;
-                }
-
-                return adjustment;
+                adjustment *= 2;
             }
+
+            return adjustment;
         };
     }
 }
