@@ -13,7 +13,7 @@ public class GildedRoseTest
     {
         // Arrange
         var name = "Sulfuras, Hand of Ragnaros";
-        var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
+        var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
         var app = new GildedRose(items);
 
         // Act
@@ -34,7 +34,7 @@ public class GildedRoseTest
     {
         // Arrange
         var name = "normal item";
-        var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
+        var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
         var app = new GildedRose(items);
 
         // Act
@@ -58,7 +58,7 @@ public class GildedRoseTest
     {
         // Arrange
         var name = "Backstage passes to a TAFKAL80ETC concert";
-        var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
+        var items = new List<Item> { new() { Name = name, SellIn = sellIn, Quality = quality } };
         var app = new GildedRose(items);
 
         // Act
