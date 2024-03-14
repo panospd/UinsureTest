@@ -44,4 +44,28 @@ public class GildedRoseTest
         Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
         Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
     }
+
+    [TestCase(2, 40, 43)]
+    [TestCase(5, 39, 42)]
+    [TestCase(6, 38, 40)]
+    [TestCase(10, 36, 38)]
+    [TestCase(11, 35, 36)]
+    [TestCase(12, 37, 38)]
+    [TestCase(2, 49, 50)]
+    [TestCase(1, 30, 33)]
+    [TestCase(0, 30, 0)]
+    public void WhenItemIsBackstagePasses_ShouldUpdateQualityAccordingly(int sellIn, int quality, int expectedQuality)
+    {
+        // Arrange
+        var name = "Backstage passes to a TAFKAL80ETC concert";
+        var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
+        var app = new GildedRose(items);
+
+        // Act
+        app.UpdateQuality();
+
+        // Assert
+        Assert.That(items[0].SellIn, Is.EqualTo(sellIn - 1));
+        Assert.That(items[0].Quality, Is.EqualTo(expectedQuality));
+    }
 }

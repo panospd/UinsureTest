@@ -38,24 +38,30 @@ public class GildedRose
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality = item.Quality + 1;
+                    if (item.Name == "Aged Brie")
+                    {
+                        item.Quality = item.Quality + 1;
+                    }
 
                     if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        if (item.SellIn < 11)
+                        var adjustment = item.SellIn switch
                         {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            <= 5 => 3,
+                            <= 10 => 2,
+                            _ => 1
+                        };
+
+                        item.Quality += adjustment;
+
+                        if (item.Quality > 50)
+                        {
+                            item.Quality = 50;
                         }
 
-                        if (item.SellIn < 6)
+                        if (item.SellIn <= 0)
                         {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = 0;
                         }
                     }
                 }
@@ -65,14 +71,7 @@ public class GildedRose
 
             if (item.SellIn < 0)
             {
-                if (item.Name != "Aged Brie")
-                {
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
-                }
-                else
+                if (item.Name == "Aged Brie")
                 {
                     if (item.Quality < 50)
                     {
