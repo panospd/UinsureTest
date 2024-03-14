@@ -12,6 +12,7 @@ public class ItemMatcherTests
     [TestCase("Aged Brie", "Aged Bri", false)]
     [TestCase("Aged Brie", "Aged Brieada", false)]
     [TestCase("Aged Brie", "ExcellentAged Brie", false)]
+    [TestCase("Aged Brie", "AgedBrie", false)]
     public void Is_WhenCalled_ShouldReturnMatchOrNot(string match, string name, bool expectedResult)
     {
         // Arrange
