@@ -61,13 +61,7 @@ public class GildedRose
             var item when item.Is("Aged Brie") => (item) =>
             {
                 var adjustment = 1;
-
-                if (item.SellIn <= 0)
-                {
-                    adjustment *= 2;
-                }
-
-                return adjustment;
+                return item.SellIn > 0 ? adjustment : adjustment * 2;
             }
             ,
             var item when item.Is("Conjured") => (item) => 2 * NormalItemAdjustment(item)
@@ -80,13 +74,7 @@ public class GildedRose
     private static Func<Item, int> NormalItemAdjustment => (item) =>
     {
         var adjustment = -1;
-
-        if (item.SellIn <= 0)
-        {
-            adjustment *= 2;
-        }
-
-        return adjustment;
+        return item.SellIn > 0 ? adjustment : adjustment * 2;
     };
 
 }
